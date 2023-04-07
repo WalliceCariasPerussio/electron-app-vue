@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: electron-app
+productName: suporte_remoto
 directories:
   buildResources: build
 files:
@@ -12,7 +12,7 @@ asarUnpack:
   - resources/**
 afterSign: build/notarize.js
 win:
-  executableName: electron-app
+  executableName: suporte_remoto
 nsis:
   artifactName: ${name}-setup.${ext}
   shortcutName: ${productName}

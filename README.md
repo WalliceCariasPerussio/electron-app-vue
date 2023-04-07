@@ -1,4 +1,4 @@
-# electron-app
+# suporte_remoto
 
 An Electron application with Vue
 

@@ -1,11 +1,6 @@
 import { contextBridge } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
-import { ping } from './preload-functions'
-
-// Custom APIs for renderer
-const api = {
-  ping
-}
+import * as api from './preload-functions'
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise

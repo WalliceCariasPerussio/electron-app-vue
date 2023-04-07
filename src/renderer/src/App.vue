@@ -1,21 +1,21 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-const ping = () => {
-  window.api.ping()
+// const ping = () => {
+//   window.api.ping()
+// }
+const connectSSH = async () => {
+  await window.api.connectSSH()
+  window.api.connectSSHTunnel(5901, 5900)
+}
+
+const disconnect = () => {
+  window.api.disconnectSSH()
 }
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="./assets/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <button @click="ping">Ping</button>
-  <HelloWorld msg="Vite + Vue" />
+  <!-- <button @click="ping">Ping</button> -->
+  <button @click="connectSSH">Conectar</button>
+  <button @click="disconnect">Desconectar</button>
 </template>
 
 <style scoped>

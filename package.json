@@ -1,5 +1,5 @@
 {
-  "name": "electron-app",
+  "name": "suporte_remoto",
   "version": "1.0.0",
   "description": "An Electron application with Vue",
   "main": "./out/main/index.js",
@@ -19,7 +19,9 @@
   "dependencies": {
     "@electron-toolkit/preload": "^1.0.3",
     "@electron-toolkit/utils": "^1.0.2",
-    "electron-updater": "^5.3.0"
+    "electron-updater": "^5.3.0",
+    "net": "^1.0.2",
+    "ssh2": "^0.5.5"
   },
   "devDependencies": {
     "@electron/notarize": "^1.2.3",
@@ -27,7 +29,7 @@
     "@vitejs/plugin-vue": "^4.1.0",
     "@vue/eslint-config-prettier": "^7.1.0",
     "electron": "^22.3.4",
-    "electron-builder": "^23.6.0",
+    "electron-builder": "^24.2.0",
     "electron-vite": "^1.0.21",
     "eslint": "^8.36.0",
     "eslint-plugin-vue": "^9.10.0",
@@ -35,5 +37,19 @@
     "prettier": "^2.8.7",
     "vite": "^4.2.1",
     "vue": "^3.2.47"
+  },
+  "build": {
+    "productName": "Suporte Remoto",
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "requestedExecutionLevel": "requireAdministrator"
+    },
+    "nsis": {
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false,
+      "perMachine": true
+    }
   }
 }
