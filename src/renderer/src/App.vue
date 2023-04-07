@@ -1,21 +1,46 @@
 <script setup>
+import { ref } from 'vue'
 // const ping = () => {
 //   window.api.ping()
 // }
+
+const connection = ref('Disconnected')
+
 const connectSSH = async () => {
+  connection.value = 'Connecting'
   await window.api.connectSSH()
   window.api.connectSSHTunnel(5901, 5900)
+  connection.value = 'Connected'
 }
 
 const disconnect = () => {
   window.api.disconnectSSH()
+  connection.value = 'Disconnected'
+}
+
+const installTightVNC = async () => {
+  try {
+    const result = await window.api.installTightVNC()
+    console.log(result)
+  } catch (error) {
+    console.error('Erro ao instalar o TightVNC:', error)
+  }
 }
 </script>
 
 <template>
   <!-- <button @click="ping">Ping</button> -->
-  <button @click="connectSSH">Conectar</button>
-  <button @click="disconnect">Desconectar</button>
+  <div>
+    <h1>Instalador do TightVNC</h1>
+    <p>Deseja instalar e configurar o TightVNC?</p>
+    <button @click="installTightVNC">Instalar TightVNC</button>
+  </div>
+  <br /><br />
+  <button @click="connectSSH" :disabled="connection == 'Connecting' || connection == 'Connected'">
+    Conectar
+  </button>
+  <button @click="disconnect" :disabled="connection == 'Disconnected'">Desconectar</button>
+  <p>{{ connection }}</p>
 </template>
 
 <style scoped>

@@ -9,8 +9,8 @@ const remoteServer = {
 }
 
 const sshTunnel = {
-  sshClient: null,
-};
+  sshClient: null
+}
 
 export function connect() {
   sshTunnel.sshClient = new Client()
@@ -63,8 +63,8 @@ export function createReverseTunnel(remotePort, localPort) {
 export function disconnect() {
   if (sshTunnel.sshClient) {
     sshTunnel.sshClient.end()
-    console.log('Cliente desconectado com sucesso!');
-  }else{
-    console.log('Cliente não conectado!');
+    console.log('Cliente desconectado com sucesso!')
+  } else {
+    console.log('Cliente não conectado!')
   }
 }
