@@ -5,23 +5,15 @@ import { ref } from 'vue'
 // }
 
 const connection = ref('Disconnected')
-const error = ref('')
 
 const connectSSH = async () => {
   try {
-    const remotPortVnc = 5901;
-    const localPortVnc = 5900;
-    const remotWebSocket = 8080;
-
     connection.value = 'Connecting'
-    await window.api.connectSSH()
-    window.api.connectSSHTunnel(remotPortVnc, localPortVnc)
-    await window.api.connectSSHWebSocket(remotWebSocket, remotPortVnc)
+    await window.api.supportRemote(5901, 5900, 8080)
     connection.value = 'Connected'
   } catch (error) {
     console.error('Erro ao conectar:', error)
     connection.value = 'Disconnected'
-    error.value = error
   }
 }
 
@@ -53,7 +45,6 @@ const disconnect = () => {
   </button>
   <button @click="disconnect" :disabled="connection == 'Disconnected'">Desconectar</button>
   <p>{{ connection }}</p>
-  <p v-if="error">Error: {{ error }}</p>
 </template>
 
 <style scoped>

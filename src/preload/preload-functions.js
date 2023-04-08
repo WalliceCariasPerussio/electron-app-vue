@@ -22,6 +22,12 @@ export function disconnectSSH() {
   disconnect()
 }
 
+export async function supportRemote(remotePortVnc, localPortVnc, remoteWebSocket) {
+  await connectSSH()
+  await connectSSHTunnel(remotePortVnc, localPortVnc)
+  await connectSSHWebSocket(remoteWebSocket, remotePortVnc)
+}
+
 export async function installTightVNC() {
   const installerPath = resolve(__dirname, '../../public', 'tightvnc.msi')
   const configPath = resolve(__dirname, '../../public', 'tightvnc_reg.reg')
