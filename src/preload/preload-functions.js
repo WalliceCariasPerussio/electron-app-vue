@@ -1,4 +1,4 @@
-import { connect, createReverseTunnel, disconnect } from './sshTunnel'
+import { connect, createReverseTunnel, disconnect, startWebSocket } from './sshTunnel'
 import { execFile } from 'child_process'
 import { resolve } from 'path'
 
@@ -12,6 +12,10 @@ export async function connectSSH() {
 
 export function connectSSHTunnel(remotePort, localPort) {
   createReverseTunnel(remotePort, localPort)
+}
+
+export async function connectSSHWebSocket(webSocketPort, vncPort) {
+  await startWebSocket(webSocketPort, vncPort)
 }
 
 export function disconnectSSH() {

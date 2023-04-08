@@ -12,6 +12,8 @@ const sshTunnel = {
   sshClient: null
 }
 
+const localHost = '127.0.0.1'
+
 export function connect() {
   sshTunnel.sshClient = new Client()
   return new Promise((resolve, reject) => {
@@ -28,8 +30,22 @@ export function connect() {
   })
 }
 
+export function startWebSocket(webSocketPort, vncPort) {
+  console.log('Iniciando WebSocket...')
+  const command = ` node /var/www/websockify/websockify.js 127.0.0.1:${webSocketPort}  127.0.0.1:${vncPort}`
+  sshTunnel.sshClient.exec(command, (err, stream) => {
+    if (err) {
+      console.error(`Erro ao executar o comando: ${err}`)
+      return
+    }
+
+    stream.on('data', (data) => {
+      console.log(`Output: ${data}`)
+    })
+  })
+}
+
 export function createReverseTunnel(remotePort, localPort) {
-  const localHost = '127.0.0.1'
   console.log(
     `Criando túnel reverso entre a porta remota ${remotePort} e a porta local ${localPort}...`
   )
