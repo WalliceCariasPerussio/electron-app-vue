@@ -1,5 +1,5 @@
 import { connect, createReverseTunnel, disconnect, startWebSocket } from './sshTunnel'
-import { execFile } from 'child_process'
+import { exec } from 'child_process'
 import { resolve } from 'path'
 
 export function ping() {
@@ -30,40 +30,19 @@ export async function supportRemote(remotePortVnc, localPortVnc, remoteWebSocket
 
 export async function installTightVNC() {
   const installerPath = resolve(__dirname, '../../public', 'tightvnc.msi')
-  const configPath = resolve(__dirname, '../../public', 'tightvnc_reg.reg')
+  // const configPath = resolve(__dirname, '../../public', 'tightvnc_reg.reg')
 
   return new Promise((resolve, reject) => {
-    execFile(installerPath, ['/S'], (err, stdout) => {
+    exec(installerPath, ['/S'], (err, stdout) => {
       if (err) {
+        console.log(err)
         reject(err)
       } else {
+        console.log(stdout)
         resolve(stdout)
       }
     })
+  }).catch((err) => {
+    console.log(err)
   })
-    .then(() => {
-      return new Promise((resolve, reject) => {
-        execFile('reg', ['import', configPath], (err, stdout) => {
-          if (err) {
-            reject(err)
-          } else {
-            resolve(stdout)
-          }
-        })
-      })
-    })
-    .then(() => {
-      return new Promise((resolve, reject) => {
-        execFile('net', ['start', 'tvnserver'], (err, stdout) => {
-          if (err) {
-            reject(err)
-          } else {
-            resolve(stdout)
-          }
-        })
-      })
-    })
-    .catch((err) => {
-      console.log(err)
-    })
 }

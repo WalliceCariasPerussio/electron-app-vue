@@ -22,24 +22,24 @@ const disconnect = () => {
   connection.value = 'Disconnected'
 }
 
-// const installTightVNC = async () => {
-//   try {
-//     const result = await window.api.installTightVNC()
-//     console.log(result)
-//   } catch (error) {
-//     console.error('Erro ao instalar o TightVNC:', error)
-//   }
-// }
+const installTightVNC = async () => {
+  try {
+    const result = await window.api.installTightVNC()
+    console.log(result)
+  } catch (error) {
+    console.error('Erro ao instalar o TightVNC:', error)
+  }
+}
 </script>
 
 <template>
   <!-- <button @click="ping">Ping</button> -->
-  <!-- <div>
+  <div>
     <h1>Instalador do TightVNC</h1>
     <p>Deseja instalar e configurar o TightVNC?</p>
     <button @click="installTightVNC">Instalar TightVNC</button>
   </div>
-  <br /><br /> -->
+  <br /><br />
   <button @click="connectSSH" :disabled="connection == 'Connecting' || connection == 'Connected'">
     Conectar
   </button>

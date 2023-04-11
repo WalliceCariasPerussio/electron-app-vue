@@ -20,7 +20,10 @@
     "@electron-toolkit/preload": "^1.0.3",
     "@electron-toolkit/utils": "^1.0.2",
     "electron-updater": "^5.3.0",
+    "laravel-echo": "^1.15.0",
     "net": "^1.0.2",
+    "pusher-js": "^8.0.2",
+    "simple-peer": "^9.11.1",
     "ssh2": "^0.5.5"
   },
   "devDependencies": {
